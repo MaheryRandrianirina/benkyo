@@ -1,0 +1,170 @@
+@import "./vars.scss";
+
+@mixin opposite_of_form_subject {
+    font-size: 12px;
+    text-decoration: underline;
+    position: absolute;
+    top: 50px;
+    left: 74px;
+    a {
+        font-weight: bold;
+        color: $CTA;
+        text-decoration: none;
+    }
+}
+
+@mixin input_validation_indication() {
+    background-repeat: no-repeat;
+    background-size: 14px;
+    background-position: right 10px top 13px;
+} 
+
+@mixin login_main_bg_from_859px() {
+    background-image: linear-gradient(to bottom, #000, #0005), url("../assets/bg.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+@mixin buttons_for_hidden_sidebars_propriety {
+    top: 50%;
+    border-radius: 50%;
+    height: 40px;
+    width: 40px;
+    color: $white;
+    background-color: $primary_gray;
+    box-shadow: 0 0 6px $secondary_black;
+    transition: background-color .3s;
+}
+
+@mixin revision_head {
+    padding: 10px;
+    color: $white;
+    border-bottom: 2px solid $primary_gray;
+    p {
+        display: inline-block;
+        text-transform: uppercase;
+        font-weight: bold;
+        text-align: center;
+    }
+    .subject{
+        width: 25%;
+    }
+    .chapter {
+        width: 25%;
+    }
+    .time {
+        width: 20%;
+    }
+}
+
+@mixin revision_body {
+    .subject {
+        display: flex;
+        width: 100%;
+        color: $white;
+        .subject-name, .subject-chapter, .revision-time {
+            text-align: center;
+        }
+        .subject-name {
+            width: 25%;
+            text-transform: uppercase;
+        }
+
+        .subject-chapter {
+            width: 30%;
+        }
+
+        .revision-time {
+            width: 25%;
+            text-align: left;
+        }
+
+        .buttons {
+            width: 20%;
+            padding: 15px 0 15px 20px;
+            div {
+                display: inline-block;
+                width: 45%;
+            }
+
+            .revision-play, .other-revision-play, .revision-pause {
+                color: $CTA;
+                transition: background .3s, transform .3s, color .3s;
+                cursor: pointer;
+            }
+
+            .another-time-revision-button i{
+                color: $attractive_title;
+                transition: transform .3s, color .3s;
+                cursor: pointer;
+            }
+
+            .revision-play:hover, .revision-pause:hover, .other-revision-play:hover,.another-time-revision-button i:hover {
+                transform: scale(1.3);
+            }
+
+            .revision-play:hover {
+                color: lighten($color: $CTA, $amount: 3);
+            }
+
+            .another-time-revision-button i:hover {
+                color: darken($color: $attractive_title, $amount: 2);
+            }
+        }   
+    }
+}
+
+@mixin small_modal {
+    height: 150px;
+    width: 35%;
+    margin-top: 20px;
+    border-radius: 0;
+    background-color: $white;
+    box-shadow: $box_shadow_for_small_modal;
+    p {
+        text-align: center;
+    }
+}
+
+@mixin confirmation_button {
+    float: left;
+    background-color: $CTA;
+    border: transparent;
+    cursor: pointer;
+    color: $white;
+    padding: 10px;
+    transition: background-color .3s;
+}
+
+@mixin cancel_button {
+    float: right;
+    border: 1px solid $CTA;
+    cursor: pointer;
+    color: $CTA;
+    padding: 10px;
+    transition: box-shadow .3s;
+}
+
+@mixin notification {
+    margin-top: 20px;
+    background-color: $white;
+    color: $primary_black;
+    box-shadow: 0 1px 3px $secondary_black;
+    width: 300px;
+    height: 120px;
+    border-radius: 0;
+}
+
+@mixin delete_button {
+    font-size: 1rem;
+    font-weight: bold;
+    background: $danger;
+    color: #fff;
+    border: none;
+    padding: 10px;
+    transition: background-color 0.2s;
+    cursor: pointer;
+    &:hover{
+        background-color: darken($color: $danger, $amount: $amountOfHoverDarkness);
+    }
+}

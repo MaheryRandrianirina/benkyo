@@ -1,0 +1,1971 @@
+@import "./mixins.scss";
+@import "./vars.scss";
+
+@font-face {
+    font-family: "Montserrat";
+    src: url("../fonts/Montserrat-Regular.otf");
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    overflow-y: hidden;
+}
+
+html, body {
+    height: 100%;
+}
+body{
+    margin: 0;
+    padding: 0;
+    background-color: $primary_blue;
+    font-family: "Montserrat", sans-serif;
+    font-size: 16px;
+    color: $white;
+}
+
+.cta_button {
+    font-size: 1rem;
+    background: $CTA;
+    color: #fff;
+    border: none;
+    padding: 10px;
+    transition: background-color 0.2s;
+    cursor: pointer;
+    &:hover{
+        background-color: darken($color: $CTA, $amount: $amountOfHoverDarkness);
+    }
+}
+
+.menu-button-container {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 10px;
+    color: $white;
+    background-color: #0008;
+    
+    .bar-menu {
+        transition: transform .3s ease, opacity .3s ease;
+    }
+    .change-icon {
+        transform: rotate(180deg);
+        opacity: 0;
+    }
+}
+.set-display-none {
+    display: none;
+}
+
+.become-carousel {
+    background: #888C80;
+}
+.home {
+    background-color: $white;
+    color: $primary_black;
+}
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    background-color: $primary_black;
+    box-shadow: 0 2px 1px $secondary_black;
+}
+
+.logo {
+    color: $white;
+    margin: 20px;
+    font-size: 40px;
+
+}
+.home .logo {
+    color: $home_logo_color;
+}
+
+/*-------------------
+TOUT CE QUI EST LOGIN ET FORMULAIRE
+----------------------*/
+#login-main {
+    display: flex;
+    width: 100%;
+    flex-wrap: wrap;
+    justify-content: space-between;
+
+    .presentation_left {
+        background-image: linear-gradient(to bottom, #000, #0005), url("../assets/bg.jpg");
+        background-repeat: no-repeat;
+        background-size:cover;
+        opacity: 0.8;
+        width: 70%;
+        color: $white;
+        font-family: "Montserrat", sans-serif;
+        .presentation-container {
+            width: 70%;
+            margin-top: 120px;
+        }
+
+        .presentation-container .presentation-title {
+            letter-spacing: 3px;
+        }
+
+        .presentation-container .presentation-paragraphe {
+            font-style: italic;
+            line-height: 1.6;   
+        }
+    }
+    .login_container_right {
+        position: relative;
+        width: 30%;
+        height: 600px;
+        background-color: $secondary_black;
+        color: $white;
+        padding: 60px 20px;
+
+        .have-no-account {
+            @include opposite_of_form_subject();
+        }
+
+        .login_form {
+            padding: 60px 40px;
+            .submitBtn {
+                @extend .cta_button;
+                width: 100%;
+                height: 40px;
+                margin: 40px 0;
+            }
+            .pseudo-container, .pwd-container {
+                width: 93%;
+                i {
+                    margin-left: 5px;
+                    color: $primary_gray;
+                }
+                input {
+                    position: relative;
+                    font-size: 1rem;
+                    margin: 3px 0;
+                    padding: 15px;
+                    height: 40px;
+                    width: 90%;
+                    background-color: $white;
+                    border-radius: 30px;
+                    border: none;
+                }
+
+                input.is_valid {
+                    background: url('../assets/is_valid.png');
+                    @include input_validation_indication();
+                }
+
+                input.is_invalid {
+                    background: url('../assets/is_invalid.png');
+                    @include input_validation_indication();
+                }
+                margin: 20px 2% 40px 0;
+                transform: translateX(5%);
+            }
+            label, .remember-me {
+                margin-left: 5%;
+            }
+        }
+        .remember-span {
+            margin-left: 10px;
+            color: $primary_blue;
+        }
+        
+    }
+}
+
+
+.visible {
+    transform: translateX(26%);
+    transition: 0.5s cubic-bezier(0.47, 0, 0.745, 0.715);
+}
+
+.condition-check {
+    opacity: $indication-opacity;
+    transform: scale(0.6);
+}
+.one_number_condition, .letters_number_condition {
+    font-style: italic;
+    opacity: $indication-opacity;
+}
+
+/*-------------------
+TOUT CE QUI EST HOME
+----------------------*/
+#home-main {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    height: 100%;
+    overflow: hidden;
+    justify-content:flex-start;
+}
+
+.sidebar-left {
+    width: 7.414%;
+    color: $white;
+    background: $primary_black;
+    transition: transform .3s;
+    i {
+        display: block;
+        padding: 20.35% 59% 20.35% 20.35%;
+        margin: 20.35%;
+        cursor: pointer;
+        font-size: 16px;
+        color: $CTA;
+        transition: transform 0.2s;
+        &:hover {
+            transform: scale(1.1);
+        }
+    }
+}
+
+.content {
+    position: relative;
+    width: 74%;
+    padding: 20px;
+    .revision_head {
+        i {
+            width: 22%;
+        }
+        i:nth-child(1){
+            margin-left: 23px;
+        }
+        i:nth-child(2){
+            margin-left: 15px;
+        }
+        i:nth-child(3){
+            margin-left: 0;
+            svg {
+                transform: translateY(5px);
+            }
+        }
+    }
+    .calendar-creation-instructions {
+        width: 70%;
+        margin: 0 auto;
+        line-height: 1.8;
+        padding-left: 15px;
+        transition: transform 0.3s;
+    }
+
+    .empty-revision {
+        margin: 150px auto;
+        text-align: center;
+        color: $attractive_title;
+        .fa-smile {
+            color: $primary_black;
+            font-size: 150px;
+        }
+    }
+}
+
+.user-profile-right {
+    width: 18.586%;
+    background: $secondary_black;
+    color: $white;
+    transition: transform .3s;
+    .user-auth {
+        text-align: center;
+        margin: 30px 38%;
+        .user-logo {
+            font-size: 50px; 
+            position: relative;
+            i {
+                font-size: 4vw;
+            }
+            .user-profile-photo-edit {
+                font-size: 12px;
+                background-color: $CTA;
+                border-radius: 50%;
+                padding: 2px;
+                color: $white;
+                position: absolute;
+                bottom: 10px;
+                right: 10%;
+                cursor: pointer;
+                opacity: 0.8;
+                transition: opacity 0.3s;
+            }
+            .user-profile-photo-edit:hover {
+                opacity: 1;
+            } 
+            
+            img {
+                width: 40px;
+                height: 40px;
+                border-radius: 50%;
+            }
+        }
+        
+        .user-pseudo {
+            font-size: 1rem;
+            margin: 0 auto;
+        }
+    }
+
+    .events {
+        position: relative;
+        width: 90%;
+        color: $primary_black;
+        margin: 50px auto;
+        padding: 20px 10px;
+        text-align: center;
+        background-color: $primary_gray;
+        box-shadow: -1px 1px 2px $primary_black;
+        border-radius: 5px;
+        .add_event {
+            @extend .cta_button;
+            border-radius: 5px;
+            margin-top: 20px;
+            width: 100%;
+        }
+        .title {
+            margin: 0 auto;
+            margin-bottom: 20px;
+            i {
+                color: $attractive_title;
+            }
+        }
+        .event {
+            border-radius: 5px;
+            background-color: $secondary_black;
+            box-shadow: -1px 1px 2px $secondary_black;
+            color: $white;
+            padding: 10px;
+            width: 100%;
+            margin-top: 10px;
+            cursor: pointer;
+            &:hover {
+                padding: 8px;
+                border: 2px solid $CTA;
+            }
+            .event_date {
+                margin-top: 10px;
+                padding-top: 5px;
+                border-top: 1px solid $primary_gray;
+                border-radius: 5px;
+                font-size: 13px;
+                font-style: italic;
+                color: $primary_gray;
+            }
+            .fa-trash {
+                color: $danger;
+                float: right;
+                margin-right: 10px;
+                transition: color .3s;
+            }
+            .fa-trash:hover {
+                color: $white;
+            }
+        }
+        .show_all_events {
+            display: block;
+            font-size: 13px;
+            float: right;
+            margin-top: 10px;
+            color: $CTA;
+            text-decoration: none;
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+    }
+}
+
+i.active-item {
+    background-color: $white;
+    color: $primary_blue;
+    border-top-left-radius: 50px;
+    border-bottom-left-radius: 50px;
+}
+
+i.active-item:hover {
+    transform: unset;
+}
+
+.edit-profile .edit-text {
+    margin-left: 10px;
+}
+
+.revision_container {
+    background-color: $secondary_black;
+    box-shadow: -1px 1px 3px $secondary_black;
+    color: $white;
+    width: 60%;
+    .revision_head {
+        @include revision_head();
+    }
+    .revision_body {
+        @include revision_body();
+    }
+    
+}
+
+.played-revision-container {
+    position: relative;
+    height: 220px;
+    background: $secondary_black;
+    border-radius: 20px;
+    box-shadow: -1px 1px 3px $secondary_black;
+    z-index: 10;
+    .revision_head {
+        @include revision_head();
+        width: 65%;
+    }
+    .revision_body {
+        @include revision_body();
+        .subject {
+            width: 65%;
+            border-top: none;
+        }
+    }
+}
+
+.played-revision-container.active-revision {
+    animation: growHeight 1s cubic-bezier(0.075, 0.82, 0.165, 1) both;
+}
+
+.not-active-revisions {
+    width: 50%;
+    float: left;
+    background: $primary_gray;
+    box-shadow: 0 0 2px $secondary_black;
+    animation: slideDown 1s cubic-bezier(0.075, 0.82, 0.165, 1) both;
+    .revision_head {
+        @include revision_head();
+        border-bottom: 1px solid $secondary_black;
+        color: $primary_black;
+        font-weight: bold
+    }
+    .revision_body {
+        @include revision_body();
+        .subject {
+            color: $primary_black;
+            width: 100%;
+        }
+        .subject .subject-name {
+            margin-left: 10px;
+        }
+    }
+}
+
+.stop {
+    color: $danger;
+    transition: transform 0.3s;
+    cursor: pointer;
+}
+.stop:hover {
+    transform: scale(1.3);
+}
+
+.circular {
+    position: absolute;
+    right: 40px;
+    bottom: 20%;
+    width: 130px;
+    height: 130px;
+    .inner {
+        position: absolute;
+        width: 80px;
+        height: 80px;
+        top: 50%;
+        left: 50%;
+        z-index: 6;
+        margin: -40px 0 0 -40px;
+        border-radius: 100%;
+        background-color: $secondary_black;
+        color: $white;
+        #chronometer {
+            font-weight: bold;
+            transform: translate(25%, 50%);
+        }
+    }
+    .bar {
+        position: absolute;
+        border-radius: 100%;
+        background: $attractive_title;
+        width: 100%;
+        height: 100%;
+        clip: rect(0px, 135px, 135px, 60px);
+    }
+    .circle {
+        .bar .progress  {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 100%;
+            background-color: $white;
+            clip: rect(0px, 65px, 135px, 0px);
+        }
+        .left .progress {
+            z-index: 1;
+            animation-name: left;
+            animation-timing-function: linear;
+            animation-fill-mode: both;
+        }
+        .right {
+            z-index: 3;
+            transform: rotate(180deg);
+            .progress {
+                animation-name: right;
+                animation-timing-function: linear;
+                animation-fill-mode: both;
+            }
+        }  
+    }
+}
+
+/*-----------------/
+TOUT CE QUI EST REGISTER
+-----------------*/
+.register-form-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    height: 100%;
+    padding: 50px 100px;
+    background-image: linear-gradient(to bottom, #000, #0005), url('../assets/Term-2_Week-3_How-to-study-texts_Final_6May19.jpg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    
+    .input-container {
+        width: 30%;
+        height: 450px;
+        border-radius: 20px;
+        padding: 7% 3%;
+        transition: transform 0.3s;
+        background-color: $white;
+        color: $primary_black;
+        
+        .already_registered {
+            @include opposite_of_form_subject();
+            position: relative;
+            top: -30px;
+            width: 90%;
+            margin-top: 30px;
+            left: 5%;
+        }
+
+        label {
+            position: relative;
+            left: 5%;
+        }
+
+        input, select {
+            display: table;
+            width: 90%;
+            height: 40px;
+            margin: 10px 5% 30px 5%;
+            background-color: transparent;
+            border-radius: 30px;
+            border: 1px solid $primary_gray;
+        }
+    }
+
+    .input-container.height_auto {
+        height: auto;
+    }
+    .container-three {
+        input.is_valid {
+            background: url('../assets/is_valid.png');
+            @include input_validation_indication();
+        }
+
+        input.is_invalid {
+            background: url('../assets/is_invalid.png');
+            @include input_validation_indication();
+        }
+        .indications {
+            color: $white;
+            width: 90%;
+            margin: 0 5% 20px 5%;
+        }
+        .submitBtn {
+            @extend .cta_button;
+            width: 100%;
+            margin: 40px 0;
+        }
+    }
+
+    .active-container {
+        box-shadow: 0 0 6px $primary_gray;
+        transform: scale(1.02);
+    }
+}
+
+
+.big-alert-danger {
+    display: block;
+    text-align: center;
+    opacity: 0;
+    font-size: 15px;
+    width: 90%;
+    border-radius: 10px;
+    color: $white;
+    background-color: $danger;
+    padding: 10px;
+    margin-top: 10px;
+    transform: translate(20px, 10px);
+    animation: calendarAnimation 0.3s both;
+}
+
+.alert-danger {
+    display: block;
+    font-size: 14px;
+    color: $danger;
+    opacity: 0;
+    margin-top: -20px;
+    margin-left: 5%;
+    margin-bottom: 20px;
+    transition: opacity 0.2s;
+    opacity: 1;
+}
+
+
+.sign-out-logo {
+    color: $CTA;
+    border: 2px solid $CTA;
+    margin: 20px 20px;
+    height: 40px;
+    width: 40px;
+    padding: 10px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: color .3s, background .3s;
+}
+.sign-out-logo:hover {
+    color: $white;
+    background-color: $CTA;
+}
+/*---------------------------------
+    TOUT CE QUI EST MODAL DE HOME
+--------------------------------*/
+
+.close {
+    float: right;
+    cursor: pointer;
+    color: $CTA;
+}
+.close:hover{
+    color: #f06040;
+}
+
+.closeModal {
+    animation-name: fadeOut;
+}
+//bar de progression
+.progress-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 6px;
+    background-color: $progressBarColor;
+}
+
+.add-calendar {
+    width: 310px;
+    height: 70px;
+    padding: 25px;
+    margin: 60px auto;
+    font-weight: bold;
+    font-size: 1rem;
+    background-color: $primary_blue;
+    color: $white;
+    cursor: pointer;
+    transition: background .3s;
+    i {
+        margin-left: 10px;
+    }
+}
+.add-calendar:hover{
+    background: darken($color: $primary_blue, $amount: 2.5);
+}
+
+.create-calendar {
+    position: relative;
+    height: 200px;
+    animation: createCalendar 0.3s both;
+    .submitBtn {
+        @extend .cta_button;
+        width: 85%;
+        font-family: "Montserrat";
+        word-spacing: 2px;
+        letter-spacing: 1px;
+        height: 50px;
+        position: absolute;
+        left: 50px;
+        padding: 5px;
+    }
+}
+
+.create_calendar_table {
+    color: $white;
+    margin: 0 50px 50px 50px;
+    border-collapse: collapse;
+    thead {
+        th {
+            padding: 10px;
+            text-align: center;
+        }
+    }
+    tbody {
+        position: relative;
+        td {
+            height: 40px;
+        }
+        td input {
+            text-align: center;
+            height: 80%;
+            border: none;
+            border-radius: 20px;
+        }
+    }
+}
+
+/*------------------------
+
+MODAL
+-----------------------*/
+.modal_container {
+    position: fixed;
+    overflow-y: scroll;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(63, 63, 63, 0.3);
+    z-index: 13;
+    .main_modal {
+        padding: 20px;
+        margin: 150px auto;
+        width: 60%;
+        background-color: $secondary_black;
+        border-radius: 30px;
+        opacity: 0;
+        transition: transform .3s, opacity .3s;
+        .close_btn {
+            display: block;
+            background: #ccc;
+            border-radius: 50%;
+            height: 30px;
+            width: 30px;
+            position: absolute;
+            right: -10px;
+            top: 0;
+            border: 2px solid #222;
+            cursor: pointer;
+            transition: transform .3s;
+        }
+        .feather-x:hover {
+            transform: scale(1.2);
+        }
+    }
+
+    .calendar_creation_modal {
+        width: 730px;
+        height: 270px;
+        margin: 150px auto;
+        border: 2px solid $primary_gray;
+        box-shadow: 1px 1px 2px $secondary_black;
+    }
+
+    .calendar_creation_notification, .another_time_revision_notification, .stoped_revision_notification {
+        @include notification();
+    }
+
+    .notification {
+        @include small_modal();
+        p {
+            margin: 0 0 20px 20px;
+        }
+        .ok {
+            @include confirmation_button();
+            position: relative;
+            top: 30px;
+        }
+    }
+
+    .another-time-revision-modal {
+        width: 50%;
+        height: 170px;
+        border-radius: 0;
+        background-color: $white;
+        box-shadow: $box_shadow_for_small_modal;
+        p {
+            text-align: center;
+            background-color: $tierce_gray;
+            border-radius: 30px;
+            padding: 10px;
+        }
+        .sure {
+            @include confirmation_button();
+            position: absolute;
+            right: 0;
+            margin-right: 110px;
+        }
+        .no {
+            @include cancel_button();
+        }
+        .new-datetime {
+            display: flex;;
+            justify-content: space-between;
+            label {
+                margin-bottom: 20px;
+            }
+        }
+    }
+
+    .pause_modal {
+        @include small_modal();
+        p {
+            margin-top: 0
+        }
+    }
+   
+    .edit_profile_photo_modal {
+        width: 372px;
+        height: 280px;
+        color: $white;
+        border: 2px solid $primary_gray;
+        box-shadow: 1px 1px 2px $secondary_black;
+        svg {
+            color: $secondary_black;
+        }
+        .container {
+            height: 100%;
+            padding: 20px;
+            .pick-profile-photo {
+                margin: 30px 45%;
+                font-size: 35px;
+                &:hover {
+                    color: $secondary_gray;
+                }
+            }
+            .imgfilename {
+                margin: -10px auto;
+                text-align: center;
+                font-size: 14px;
+            }
+            .edit_profile_photo_form{
+                height: 100%;
+                position: relative
+            }
+            .edit_profile_photo_btn {
+                @extend .cta_button;
+                position: absolute;
+                bottom: -10px;
+                left: 0;
+                width: 100%;
+            }
+            .edit_profile_photo_form label {
+                display: block;
+                margin-bottom: 10px;
+            }
+        }
+        
+    }
+
+    .sure_modal {
+        @include small_modal();
+        width: 40%;
+    }
+
+    .delete_calendar_modal {
+        width: 40%;
+        height: 155px;
+        border-radius: 0;
+        background-color: $white;
+        p {
+            text-align: center
+        }
+        .no {
+            margin-top: 12px;
+        }
+    }
+    
+    .event_creation_modal {
+        margin-top: 100px;
+        width: 372px;
+        height: 520px;
+        border: 2px solid $primary_gray;
+        box-shadow: 1px 1px 2px $secondary_black;
+        form {
+            padding-left: 20px;
+            .event_one, .event_two {
+                color: $white;
+                .caption {
+                    text-transform: uppercase;
+                    color: $attractive_title;
+                }
+                .form_group {
+                    margin-top: 10px;
+                    label {
+                        display: inline-block;
+                        width: 115px;
+                    }
+                    input, textarea {
+                        width: 173px;
+                        border-radius: 5px;
+                        border: none;
+                    }
+                    input {
+                        height: 30px;
+                    }
+                    textarea {
+                        height: 50px;
+                    }
+                }
+            }
+            .event_two {
+                margin-top: 40px
+            }
+            .save_events {
+                @extend .cta_button;
+                margin-top: 40px;
+                width: 90%
+            }
+        }
+    }
+
+    .event_deletion_modal {
+        width: 40%;
+        height: 155px;
+        border-radius: 0;
+        background-color: $white;
+        p {
+            text-align: center
+        }
+        .sure, .no {
+            margin-top: 12px;
+        }
+    }
+
+    .events_showing_modal {
+        border-radius: 5px;
+        color: $white;
+        box-shadow: -1px 1px 2px $primary_black, 1px 0 2px $primary_black;
+        svg {
+            color: $secondary_black;
+        }
+        .event {
+            display: inline-block;
+            border-radius: 5px;
+            background-color: $white;
+            box-shadow: -1px 1px 1px $primary_black;
+            color: $primary_black;
+            padding: 10px;
+            width: 47%;
+            margin-top: 10px;
+            cursor: pointer;
+            .event_date {
+                margin-top: 10px;
+                padding-top: 5px;
+                border-top: 1px solid $primary_gray;
+                border-radius: 5px;
+                font-size: 13px;
+                font-style: italic;
+                color: $primary_gray;
+            }
+            .fa-trash {
+                color: $danger;
+                float: right;
+                margin-right: 10px;
+                transition: transform .3s;
+            }
+            .fa-trash:hover {
+                transform: scale(1.2);
+            }
+        }
+        .event:nth-child(2), .event:nth-child(4){
+            margin-left: 5%;
+        }
+    }
+
+    .calendar_deletion_notification, .event_creation_notification , .edit_profile_photo_notification{
+        @include notification();
+    }
+    .sure {
+        @include confirmation_button();
+    }
+    .no {
+        @include cancel_button();
+    }
+    .sure:hover {
+        background-color: darken($color: $CTA, $amount: 4);
+    }
+    .no:hover {
+        box-shadow: 0 0 5px $primary_blue;
+    }
+
+    .active_modal {
+        transform: translateY(20px);
+        opacity: 1;
+    }
+}
+
+/*----------------------
+
+FIN MODAL
+----------------------*/
+.slide-instructions-top {
+    transform: translateY(-10px);
+}
+.warning {
+    margin-left: 50px;
+    margin-bottom: 30px;
+    opacity: 0;
+    color: $danger;
+    i {
+        margin-right: 15px;
+    }
+    transition: opacity .3s;
+}
+.warning.active_warning {
+    opacity: 1;
+}
+.content .not-even-calendar {
+    color: $primary_black;
+    margin: 50px;
+    h1 {
+        color: $attractive_title;
+        text-align: center;
+        word-spacing: 5px;
+        letter-spacing: 1px;
+        margin-bottom: 30px;
+    }
+}
+.calendar {
+    opacity: 0;
+    width: 80%;
+    text-align: left;
+    margin: 20px 7%;
+    border-collapse: collapse;
+    animation: calendarAnimation 0.3s both;
+    thead {
+        color: $white;
+        background-color: $secondary_black;
+    }
+    .calendar-tbody {
+        .subject_name {
+            text-transform: uppercase;
+        }
+        .subject_chapter, .subject_time {
+            text-align: right;
+            font-weight: bold;
+        }
+        .status.done {
+            color: success;
+        }
+        .status.undone {
+            color: $danger;
+        }
+    }
+    td, th {
+        padding: 10px;
+        position: relative;
+        width: 20%;
+        i {
+            float: right;
+        }
+    }  
+    td {
+        border-bottom: 1px solid $secondary_black;
+    }
+}
+
+.delete_button {
+    @include delete_button();
+    margin: 20px 30%;
+    float: right;
+}
+
+.add_line_button, .generate_calendar_button, .remove_line_button {
+    position: relative;
+}
+
+.add_line_button {
+    left: 10px;
+}
+
+.generate_calendar_button {
+    left: 20px;
+}
+
+.remove_line_button {
+    left: 30px;
+}
+.add-line, .generate-calendar {
+    padding: 4px;
+    border-radius: 10px;
+    background-color: $primary_blue;
+    color: $white;
+    transition: transform 0.3s, box-shadow 0.3s;
+    cursor: pointer;
+}
+
+.generate-calendar {
+    background-color: $primary_gray;
+}
+
+.focus-for-warning {
+    box-shadow: 0 0 5px red;
+    border: transparent;
+}
+.add-line:hover, .generate-calendar:hover {
+    transform: scale(1.2);
+    box-shadow: 0px 0px 3px $primary_gray;
+}
+
+.hidden {
+    animation: hide 0.3s both;
+}
+
+.remove-line{
+    font-size: 25px;
+    color: $danger;
+    transition: transform 0.3s;
+    cursor: pointer;
+}
+
+.remove-line:hover{
+    transform: scale(1.1);
+}
+
+.subject-line{
+    opacity: 0;
+    animation: calendarAnimation 0.6s both;
+}
+.invisible-subject-line {
+    opacity: 1;
+    animation: hide 0.3s both;
+}
+
+@keyframes left {
+    100%{
+        transform: rotate(180deg);
+    }
+}
+@keyframes right {
+    100%{
+        transform: rotate(180deg);
+    }
+}
+
+@keyframes boundArrow {
+    from {
+        text-shadow: none;
+        bottom: 50%;
+    }
+    to {
+        text-shadow: 0 0 10px $CTA;
+        bottom: 45%
+    }
+}
+
+@keyframes calendarAnimation {
+    from { opacity: 0;}
+    to { opacity: 1;}
+}
+
+@keyframes hide {
+    from { opacity: 1;}
+    to { opacity: 0;}
+}
+
+@keyframes slideDown {
+    from { margin-top: 0}
+    to {
+        margin-top: 50px;
+    }
+}
+
+@keyframes growHeight {
+    from {
+        height: 220px;
+    }
+    to {
+        height: 320px;
+    }
+}
+
+@keyframes animateSureDialog {
+    from {
+        top: -30px;
+        opacity: 0;
+    }
+    to {
+        top: 10px;
+        opacity: 1;
+    }  
+}
+
+@keyframes removeDialog {
+    from {
+        top: 10px;
+        opacity: 1;
+    }
+    to {
+        top: -30px;
+        opacity: 0;
+    }
+}
+
+@keyframes animateAnotherTimeDialog {
+    from {
+        top: 100px;
+        opacity: 0;
+        transform: scale(0.5);
+    }
+    to {
+        top: 200px;
+        opacity: 1;
+        transform: scale(1);
+    }  
+}
+
+@keyframes removeAnotherTimeDialog {
+    from {
+        top: 200px;
+        opacity: 1;
+        transform: scale(1);
+    }
+    to {
+        top: 100px;
+        opacity: 0;
+        transform: scale(0.6);
+    }
+}
+
+@keyframes createCalendar {
+    from {
+        top: 120px;
+    }
+    to {
+        top: 30px;
+    }
+}
+
+/* DEBUT PARTIE RESPONSIVE */
+@media screen and (max-width: 1192px) and (min-width: 860px){
+    #login-main {
+        .presentation_left {
+            width: 65%;
+        }
+        .login_container_right {
+            width: 35%;
+            .have-no-account {
+                left: 54px;
+            }
+            .login_form {
+                margin-top: 20px;
+                padding: 20px;
+            }
+        }  
+    }      
+}
+
+@media only screen and (max-width:920px) and (min-width:430px) {
+    .modal_container .another-time-revision-modal{
+        width: 400px;
+        .new-datetime {
+            padding-left: 30px;
+        }
+        input {
+            margin-top: 10px;
+        }
+    }
+}
+
+@media only screen and (max-width:926px) {
+    .calendar {
+        width: 550px;
+        left: 0;
+        right: 0;
+        margin: 20px auto;
+    }
+}
+
+@media only screen and (max-width: 914px) and (min-width: 750px){
+    .register-form-container {
+        padding: 50px;
+    }
+}
+
+
+@media only screen and (max-width: 800px) {
+    .modal_container {
+        .calendar_creation_modal {
+            width: 500px;
+            .create_calendar_table {
+                margin: 0 20px;
+                input {
+                    width: 100px;
+                }
+            }
+    
+            .action_menu_button {
+                position: relative;
+                left: 10px;
+                top: -8px;
+            }
+    
+            .hot_dog_menu_circle {
+                position: absolute;
+                height: 6px;
+                width: 6px;
+                border-radius: 50%;
+                background-color: $CTA;
+            }
+    
+            .hot_dog_menu_circle:nth-child(1) {
+                top: 0;
+            }
+            .hot_dog_menu_circle:nth-child(2) {
+                top: 8px;
+            }
+            .hot_dog_menu_circle:nth-child(3) {
+                top: 16px;
+            }
+    
+            .action_menu {
+                position : absolute;
+                opacity : 0;
+                width : 33px;
+                padding : 5px 3px;
+                height : 80px;
+                border-radius : 5px;
+                border : 1px solid $primary_gray;
+                background-color : $primary_black;
+                box-shadow : -1px 1px 2px darken($color: $primary_black, $amount: 2);
+                transition : transform .3s, opacity .3s;
+            }
+            .action_menu .row_action_button {
+                position: relative;
+                left: 0;
+                display: block; 
+            }
+            .action_menu .row_action_button:nth-child(2){
+                top: -10px;
+            }
+            .action_menu.visible_action_menu {
+                opacity: 1;
+                transform: translate(17px, 20px);
+            }
+            .action_menu.three_children {
+                height: 100px;
+            }
+            .action_menu.three_children .row_action_button:nth-child(3) {
+                top: -23px;
+            }
+    
+            .submitBtn {
+                width: 90%;
+                left: 20px;
+                margin-top: 20px;
+            }
+        }
+
+        .delete_calendar_modal {
+            width: 280px;
+            height: 170px;
+        }
+        
+        .event_deletion_modal {
+            width: 310px;
+        }
+    }
+    
+    .not-active-revisions {
+        width: 65%;
+    }
+}
+
+@media only screen and (max-width: 900px) and (min-width: 601px) {
+    .sidebar_left_button, .user_profile_button {
+        position: absolute;
+        @include buttons_for_hidden_sidebars_propriety();
+        &:hover {
+            background-color: $CTA;
+        }
+    }
+
+    .sidebar_left_button {
+        left: -25px;
+        padding: 12px 20px;
+    }
+
+    .user_profile_button {
+        right: -25px;
+        padding: 9px 6px;
+    }
+
+    .content {
+        width: 100%;
+    }
+
+    .sidebar-left {
+        opacity: 0;
+        width: 0;
+        transform: translateX(-70px);
+    }
+
+    .user-profile-right {
+        opacity: 0;
+        width: 0;
+        transform: translateX(170px);
+    }
+    .visible_sidebar_left {
+        width: 70px;
+        height: 100%;
+        opacity: 1;
+        transform: translateX(0);
+    }
+    .visible_user_profile {
+        width: 170px;
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@media only screen and (max-width: 749px) and (min-width: 630px) {
+    .register-form-container {
+        flex-direction: row;
+        height: auto;
+        padding: 60px;
+
+        .input-container {
+            width: 46%;
+            height: 410px;
+        }
+
+        .input-container.container-two {
+            position: relative;
+        }
+
+        .input-container.container-two::after {
+            content: 'v';
+            position: absolute;
+            left: -35px;
+            bottom: 50%;
+            margin-bottom: -25px;
+            font-size: 40px;
+            height: 50px;
+            width: 50px;
+            color: $CTA;
+            animation: boundArrow 1s both 0s ease infinite ;
+        }
+        .input-container.container-three {
+            width: 400px;
+            padding: 50px;
+            margin: 30px auto 0 auto
+        }
+    }
+}
+
+@media only screen and (max-width: 715px) {
+    .modal_container {
+        .pause_modal, .notification {
+            width: 250px;
+        }
+        .sure_modal {
+            width: 300px;
+        }
+    }
+}
+
+@media only screen and (max-width:600px) {
+    body {
+        overflow: visible;
+    }
+    .menu {
+        margin: 10px;
+        padding: 10px;
+        border: 2px solid $primary_gray;
+        border-radius: 30px;
+        i {
+            padding: 12px;
+            color: $CTA;
+        }
+        i.active-item {
+            border-radius: 50%;
+        }
+    }
+
+    .content {
+        width: 100%;
+        .not-even-calendar {
+            margin: 50px 0;
+        }
+    }
+
+    .sidebar_left_button {
+        display: none;
+    }
+
+    .user_profile_button {
+        position: absolute;
+        @include buttons_for_hidden_sidebars_propriety();
+        &:hover {
+            background-color: $CTA;
+        }
+        right: -25px;
+        padding: 9px 6px;
+    }
+    .user-profile-right {
+        opacity: 0;
+        width: 0;
+        transform: translateX(170px);
+    }
+    
+    .visible_user_profile {
+        position: absolute;
+        right: 0;
+        width: 170px;
+        height: 100%;
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@media only screen and (max-height: 600px){
+    body {
+        overflow-y: visible;
+    }
+}
+
+@media screen and (max-width: 859px) and (min-width: 561px){
+    #login-main {
+        @include login_main_bg_from_859px();
+        .login_container_right {
+            width: 60%;
+            margin: 0 auto;
+            background-color: transparent;
+            padding-top: 40px;
+            .have-no-account {
+                left: unset;
+                margin-left: 18px;
+            }
+            .login_form {
+                padding: 40px 0;
+                margin-top: 20px;
+                label {
+                    color: $white;
+                }
+                input {
+                    background-color: transparent;
+                    border-color: $white;
+                }
+                .remember-span {
+                    color: $white;
+                }
+                .submitBtn {
+                    width: 90%;
+                    margin-left: 5%;
+                }
+            }
+        }
+        .presentation_left {
+            display: none;
+        }
+    }
+}
+
+@media only screen and (max-width: 629px) {
+    .register-form-container {
+        display: block;
+        padding: 60px 100px;
+        .carousel {
+            position: relative;
+            overflow: hidden;
+            .carousel_container {
+                transition: transform .3s;
+                transform: translate3d(0,0,0);
+            }
+            
+            .carousel_prev, .carousel_next {
+                position: absolute;
+                background-color: $CTA;
+                height: 30px;
+                width: 30px;
+                top: 50%;
+                margin-top: -15px;
+                padding: 6px;
+                border-radius: 50%;
+                cursor: pointer;
+                transition: transform .3s;
+            }
+
+            .carousel_prev {
+                left: 0;
+            }
+
+            .carousel_next {
+                right: 0;
+                padding: 7px 8px;
+            }
+
+            .carousel_next:hover, .carousel_prev:hover {
+                transform: scale(1.1);
+            }
+
+            .carousel_prev_hidden, .carousel_next_hidden {
+                display: none;
+            }
+        }
+        
+        .carousel .carousel_item {
+            float: left;
+            .input-container {
+                width: auto;
+                margin: 0 30px;
+                padding: 40px 20px;
+            }
+        }
+
+        .carousel_container::after {
+            content: '';
+            clear: both;
+            display: table;
+        }
+    }
+
+    .calendar {
+        width: 90%;
+    }
+}
+
+@media screen and (max-width: 560px) {
+    #login-main {
+        @include login_main_bg_from_859px();
+        .login_container_right {
+            width: 400px;
+            margin: 0 auto;
+            background-color: transparent;
+            .login_form {
+                label {
+                    color: $white;
+                }
+                input {
+                    background-color: transparent;
+                }
+                .remember-span {
+                    color: $white;
+                }
+                .submitBtn {
+                    width: 90%;
+                    margin-left: 5%;
+                }
+            }
+        }
+        .presentation_left {
+            display: none;
+        }
+    }
+
+    .modal_container .calendar_creation_modal {
+        width: 90%;
+        .create_calendar_table {
+            margin: 0;
+            th {
+                padding: 5px;
+            }
+            input {
+                width: 80%;
+            }
+        }
+
+        .submitBtn {
+            left: 0;
+            width: 100%;
+        }
+
+        .action_menu_button {
+            left: 0;
+        }
+
+        .action_menu.visible_action_menu {
+            z-index: 40;
+            transform: translate(-33px, 20px)
+        }
+    }
+
+    .content .revision_container {
+        width: 100%;
+    }
+
+    .played-revision-container {
+        .revision_head {
+            width: 100%;
+        }
+        .revision_body {
+            .subject {
+                width: 100%;
+            }
+            .subject .buttons {
+                width: 25%;
+            }
+            .subject .revision-time {
+                width: 25%;
+            }
+        }
+        .circular {
+            right: 20px;
+            bottom: 20px;
+        }
+    }
+
+    .not-active-revisions {
+        width: 80%;
+    }
+}
+
+@media only screen and (max-width: 520px){
+    .calendar {
+        thead {
+            th i {
+                opacity: 0;
+            }
+            select {
+                width: 80%;
+                color: $CTA;
+                font-weight: bold;
+                height: 30px;
+            }
+        }
+        .subject_date {
+            text-align: right;
+        }
+    }
+}
+
+@media only screen and (max-width:429px) {
+    .modal_container { 
+        .another-time-revision-modal{
+            width: 270px;
+            height: 230px;
+            .new-datetime {
+                padding-left: 15px;
+            }
+            input {
+                margin-top: 10px;
+            }
+            .sure {
+                margin-left: 0;
+            }
+        }
+
+        .event_creation_modal {
+            width: 280px;
+            overflow-y: scroll;
+            overflow-x: hidden;
+            .close_btn {
+                position: sticky;
+            }
+            .form_group {
+                margin-bottom: 10px;
+            }
+            label {
+                margin-bottom: 10px;
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 372px) {
+    .logo {
+        margin: 10px;
+    }
+    .menu {
+        padding: 0;
+        border: none;
+    }
+    .sign-out-logo {
+        margin: 10px;
+    }
+
+    .not-active-revisions {
+        width: 100%;
+    }
+    
+    .content .revision_body .subject{
+        .buttons {
+            padding-left: 25px;
+            div {
+                display: block;
+            }
+            div:nth-child(2), div:nth-child(3){
+                margin-top: 10px;
+            }
+        }
+    } 
+}
+
+@media only screen and (max-width: 308px) {
+    .menu {
+        i {
+            padding: 10px;
+            transform: scale(0.9);
+        }
+    }
+
+    .modal_container .events_showing_modal {
+        width: 230px;
+    }
+}
+
+@media only screen and (max-width:400px) {
+    .content .revision_container {
+        .revision_head {
+            i:nth-child(1){
+                margin-left: 20px;
+            }
+            i:nth-child(2){
+                margin-left: 10px;
+            }
+            i:nth-child(3){
+                margin-left: -10px;
+            }
+        }
+    }
+
+    .modal_container .edit_profile_photo_modal {
+        width: 90%;
+        label {
+            text-align: center;
+        }
+    }
+}
+
+@media only screen and (max-width: 500px) {
+    .register-form-container {
+        padding: 0;
+        .carousel_container {
+            margin: 50px 0;
+        }
+    }
+
+    .modal_container .events_showing_modal {
+        width: 270px;
+        .event {
+            width: 100%;
+            display: block;
+        }
+        .event:nth-child(2), .event:nth-child(4) {
+            margin-left: 0;
+        }
+    }
+}
+
+@media screen and (max-width: 440px) {
+    .modal_container .calendar_creation_modal {
+        .create-calendar {
+            overflow-y: hidden;
+            .submitBtn {
+                bottom: 20px;
+            }
+        }
+    }
+
+    .modal_container .calendar_creation_modal .create-calendar {
+        thead {
+            th:nth-child(1) {
+                transform: translateX(55%);
+            }
+            th:nth-child(2) {
+                transform: translateX(90px);
+            }
+            th:nth-child(3) {
+                transform: translateX(320%);
+            }
+            th:nth-child(4) {
+                transform: translateX(420%);
+            }
+        }
+        tbody::after {
+            content: '';
+            clear: both;
+            display: table;
+        }
+        .subject-line {
+            position: relative;
+            height: 40px;
+            td {
+                position: absolute;
+                width: 50%;
+                input {
+                    width: 100%;
+                }
+            }
+            td:nth-child(1) {
+                left: 0;
+            }
+            td:nth-child(2) {
+               right: 0;
+            }
+            td:nth-child(3) {
+                right: -50%;
+            }
+            td:nth-child(4) {
+                right: -100%;
+            }
+            .action_menu {
+                top: 0;
+                right: -110%;
+                td {
+                    position: relative;
+                }
+            }
+            .action_menu_button {
+                position: absolute;
+                width: 5%;
+                top: -10px;
+                left: 202%;
+            }
+        }
+        .subject-line::after {
+            content: '';
+            clear: both;
+            display: table;
+        }
+    }
+}
+
+@media screen and (max-width: 341px) {
+    #login-main {
+        .login_container_right {
+            .have-no-account {
+                font-size: 12px;
+                left: 35px;
+            }
+            .login_form {
+                padding: 50px 5px;
+                .submitBtn {
+                    margin-top: 50px;
+                }
+
+                .pseudo-container, .pwd-container {
+                    margin-top: 10px;
+                    margin-bottom: 20px;
+                }
+            }
+        } 
+    }
+
+    .played-revision-container.active-revision .circular {
+        right: 10px;
+        bottom: 10px;
+    }
+    .modal_container {
+        .event_deletion_modal {
+            width: 270px;
+            .sure {
+                width: 140px;
+                margin-top: 0;
+            }
+        }
+    }
+}
