@@ -21,6 +21,11 @@ function foreachArrayElements(array, callback)
     })
 }
 
+/**
+ * 
+ * @param {{}} object 
+ * @param {(index: number, array: HTMLElement[])=>void} callback 
+ */
 function loopOverObject(object, callback)
 {
     for(let index in object) {
@@ -47,7 +52,15 @@ function isUndefined(element)
     return element === undefined
 }
 
+/**
+ * 
+ * @param {[] | undefined} obj 
+ */
+function IsIterable(obj){
+    return !isUndefined(obj) && obj.length > 0 
+}
+
 export { 
     createConstArray, createArray, pushElementToArray, foreachArrayElements,
-    classicForLoop, loopOverObject, isUndefined
+    classicForLoop, loopOverObject, isUndefined, IsIterable
 }

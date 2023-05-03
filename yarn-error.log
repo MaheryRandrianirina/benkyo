@@ -1,0 +1,74 @@
+Arguments: 
+  C:\Program Files\nodejs\node.exe C:\Users\User\AppData\Roaming\npm\node_modules\yarn\bin\yarn.js
+
+PATH: 
+  C:\cmder\bin;C:\cmder\vendor\bin;C:\cmder\vendor\conemu-maximus5\ConEmu\Scripts;C:\cmder\vendor\conemu-maximus5;C:\cmder\vendor\conemu-maximus5\ConEmu;C:\Program Files (x86)\VMware\VMware Player\bin\;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files\Git\cmd;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\Go\bin;C:\mongosh-1.8.0-win32-x64\bin;C:\Program Files\nodejs\;D:\Ruby31-x64\bin;C:\Ruby31-x64\bin;C:\Program Files\MySQL\MySQL Shell 8.0\bin\;C:\Users\User\AppData\Local\Programs\Python\Python37\Scripts\;C:\Users\User\AppData\Local\Programs\Python\Python37\;C:\Users\User\AppData\Local\Microsoft\WindowsApps;C:\Users\User\AppData\Local\Programs\Microsoft VS Code\bin;C:\Program Files\JetBrains\PyCharm Community Edition 2021.3.1\bin;;C:\dart-sdk\dart-sdk;C:\Program Files\PHP;C:\src\flutter\bin;C:\Program Files\Git\bin;C:\Program Files\JetBrains\IntelliJ IDEA 2021.1\bin;;C:\Program Files\MySQL\MySQL Shell 8.0\bin;C:\Program Files\MySQL\MySQL Server 8.0\bin;C:\cmder\bin;C:\Users\User\go\bin;C:\Users\User\AppData\Local\GitHubDesktop\bin;C:\Program Files\MongoDB\Server\6.0\bin;C:\Users\User\AppData\Roaming\npm;C:\cmder
+
+Yarn version: 
+  1.22.18
+
+Node version: 
+  17.4.0
+
+Platform: 
+  win32 x64
+
+Trace: 
+  Error: getaddrinfo ENOTFOUND registry.yarnpkg.com
+      at GetAddrInfoReqWrap.onlookup [as oncomplete] (node:dns:72:26)
+
+npm manifest: 
+  {
+    "name": "webpack-demo",
+    "version": "1.0.0",
+    "description": "",
+    "private": true,
+    "scripts": {
+      "dev": "set NODE_ENV=dev& webpack",
+      "prod": "webpack",
+      "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "devDependencies": {
+      "@babel/core": "^7.18.6",
+      "@babel/preset-env": "^7.18.6",
+      "autoprefixer": "^10.4.7",
+      "babel-core": "^6.26.3",
+      "babel-loader": "^8.2.5",
+      "babel-plugin-syntax-dynamic-import": "^6.18.0",
+      "babel-preset-env": "^1.7.0",
+      "clean-webpack-plugin": "^4.0.0",
+      "css-loader": "^6.7.1",
+      "eslint": "^8.22.0",
+      "eslint-loader": "^4.0.2",
+      "eslint-plugin-import": "^2.26.0",
+      "eslint-plugin-n": "^15.2.4",
+      "eslint-plugin-promise": "^6.0.0",
+      "eslint-webpack-plugin": "^3.2.0",
+      "extract-text-webpack-plugin": "^3.0.2",
+      "file-loader": "^6.2.0",
+      "img-loader": "^4.0.0",
+      "mini-css-extract-plugin": "^2.6.1",
+      "node-sass": "^7.0.1",
+      "postcss-loader": "^7.0.0",
+      "sass-loader": "^13.0.0",
+      "style-loader": "^3.3.1",
+      "uglifyjs-webpack-plugin": "^2.2.0",
+      "url-loader": "^4.1.1",
+      "webpack": "^5.72.1",
+      "webpack-cli": "^4.9.2",
+      "webpack-manifest-plugin": "^5.0.0"
+    },
+    "dependencies": {
+      "eslint-config-standard": "^17.0.0",
+      "jquery": "^3.6.0"
+    }
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile

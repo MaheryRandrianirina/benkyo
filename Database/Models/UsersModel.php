@@ -8,6 +8,7 @@ use Exception;
 use stdClass;
 
 class UsersModel extends Model {
+
     /**
      * nom de la table
      */
@@ -17,7 +18,9 @@ class UsersModel extends Model {
     {
         unset($posts['pwd-confirm']);
         unset($posts['submitBtn']);
+
         $this->posts = $posts;
+
         if($this->insert(["username", "mail", "birth", "country", "city", "sexe", "password"])){
             return $this->login($this->posts);
         }else{
@@ -28,19 +31,19 @@ class UsersModel extends Model {
     /**
      * login
      * execute les requêtes pour la connexion de l'utilisateur
-     * @param  mixed $posts
-     * @return void
+     * @param  array $posts
+     * @return array
      */
-    public function login($posts = [])
+    public function login(array $posts = []): array
     {
         $this->posts = $posts;
         $userStatement = $this->select(["*"], ["username = ?"], ["username" => $this->posts['pseudo']]);
 
         if($userStatement !== null){
-            $user = $this->fetch($userStatement, User::class, true);
-            return $user;
+            $users = $this->fetch($userStatement, User::class, true);
+            return $users;
         }else{
-            return null;
+            return [];
         }
         
     }

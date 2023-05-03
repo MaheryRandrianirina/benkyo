@@ -3,16 +3,17 @@ namespace Database;
 
 use PDO;
 
-use function PHPSTORM_META\map;
-
 class Database {
     private static $_instance;
+
     private $pdo;
+
     public $posts = [];
+    
     const HOST = "localhost";
     const USERNAME = "root";
-    const PASSWORD = "";
-    const DBNAME = "benkyo";
+    const PASSWORD = "root";
+    const DBNAME = "studyapp";
 
     public static function getInstance(): self
     {

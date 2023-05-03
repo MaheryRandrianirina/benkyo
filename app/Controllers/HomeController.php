@@ -12,6 +12,7 @@ use Core\Entities\Calendarcontent;
 use Database\Models\UsersModel;
 
 class HomeController extends Controller {
+
     public function __construct(AltoRouter $router)
     {
         parent::__construct();
@@ -19,12 +20,13 @@ class HomeController extends Controller {
     }
 
     /**
-     * @param Array $params paramètres de l'url
+     * @param array $params paramètres de l'url
      */
-    public function index($params = []):void
+    public function index(array $params = []):void
     {
         SessionController::setSessionStart();
         $usersModel = new UsersModel();
+        
         if($this->authorized()){
             $profilePhoto = UsersModel::profilePhoto();
             $events = $usersModel->events()->getSample();

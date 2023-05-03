@@ -244,7 +244,6 @@ class Model {
      * @param  mixed $statement
      * @param  mixed $classForFetch
      * @param  mixed $all précise si on doit faire un fetchAll ou un simple fetch
-     * @return GlobalInterface | null | false
      */
     public function fetch($statement, $classForFetch = null, bool $all = false)
     {
@@ -261,7 +260,6 @@ class Model {
      * @param  mixed $statement
      * @param  mixed $classForFetch
      * @param  mixed $all
-     * @return void
      */
     public function fetchManager($statement, $classForFetch = null, bool $all = false)
     {

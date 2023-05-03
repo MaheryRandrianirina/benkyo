@@ -7,10 +7,12 @@ use Core\Helpers\User;
 use Core\Entities\Emploidutemps;
 
 class UserController extends Controller {
+
     public function calendar()
     {
-        $formcontroller = new FormController();
-        $errorMessages = $this->validateCalendarEntries($_POST); 
+        $formcontroller = new FormController(); 
+        $errorMessages = $this->validateCalendarEntries($_POST);
+
         if(empty($errorMessages)){
             $sanitizedPosts = $formcontroller->sanitize($_POST);
             $app = App::getInstance();
@@ -97,11 +99,12 @@ class UserController extends Controller {
     private function validateCalendarEntries(array $posts = []): array
     {
         $errorMessages = [];
-        $chunkedPost = array_chunk($_POST, 4, true);
+        $chunkedPost = array_chunk($posts, 4, true);
         $loopNumberForValidation = count($chunkedPost) - 1;
+        
         for($i = 0; count($chunkedPost) < $loopNumberForValidation; $i++){
             $errors = $this->getValidator($_POST)
-                ->required('subject', 'chapter', 'date', 'hour')
+                ->required('subject' . $i+1, 'chapter' . $i+1, 'date' . $i+1, 'hour' . $i+1)
                 ->getErrors();
                 
             if($errors !== null && !empty($errors->getMessages())){

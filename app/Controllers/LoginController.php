@@ -16,12 +16,11 @@ class LoginController extends FormController {
     }
 
     /**
-     * login
      * rend la vue login
-     * @param  mixed $params
+     * @param  array $params
      * @return void
      */
-    public function loginPage($params = []):void
+    public function loginPage(array $params = []):void
     {
         SessionController::setSessionStart();
         if($this->authorized()){
@@ -50,6 +49,7 @@ class LoginController extends FormController {
             $app = App::getInstance();
             $usersmodel = $app->getModel("Users");
             $users = $usersmodel->login($_POST);
+
             if(!empty($users)){
                 $this->login($users, $_POST);
             }else{
@@ -61,26 +61,25 @@ class LoginController extends FormController {
         }
     }
     /**
-     * login
      * crée la session de connexion
-     * @param  mixed $user : peut être un tableau ou une instance de GlobalInterface
-     * @param  mixed $posts
+     * 
+     * @param  array $users
+     * @param  array $posts
      * @return void
      */
-    public function login($users, $posts = []): void
+    public function login(array $users, array $posts = []): void
     {
         foreach($users as $user){
             if(password_verify($posts['pwd'], $user->getPassword())){
-                if(isset($posts['remember-me']) || $posts['remember-me'] === 'on'){
+                if(isset($posts['remember-me']) && $posts['remember-me'] === 'on'){
                     $cookieManager = new CookiesManager();
-                    $cookieManager->setForLoginRemember($users);
+                    $cookieManager->setForLoginRemember($user);
                 }else{
                     SessionController::setSession("auth", $user->getId());
                 }
                 
                 $this->redirect("home");
                 http_response_code(301);
-
             }else{
                 $this->redirect("login", "uncorrect-password", ["pwd" => "Le mot de passe est incorrect"]);
                 http_response_code(301);

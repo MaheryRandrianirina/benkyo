@@ -6,16 +6,20 @@ use App\App;
 class CookiesManager {   
 
     /**
-     * crée une cookie après le login si remember-me a été coché.
+     * crée une cookie après le login si le champ "remember-me" a été coché.
+     * 
      * @param  array $users
      * @param  mixed $posts
      * @return void
      */
-    public function setForLoginRemember(array $users = []): void
+    public function setForLoginRemember($user): void
     {
-        foreach($users as $user){
-            setcookie("auth", $user->getId() . "----" . sha1($user->getUsername() . $user->getPassword()), time() + 3600 * 24 * 7, "/", $_SERVER['HTTP_HOST'], false, true);
-        }
+        setcookie("auth", 
+            $user->getId() . "----" . sha1($user->getUsername() . $user->getPassword()), 
+            time() + 3600 * 24 * 7, "/", 
+            "localhost", 
+            false, true
+        ); 
     } 
 
     /**

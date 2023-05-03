@@ -16,11 +16,11 @@ class LogoutController extends Controller {
     public function logout($params = [])
     {
         SessionController::setSessionStart();
-
+        
         if(isset($_SESSION['auth'])){
             session_unset();
         }elseif(isset($_COOKIE['auth'])){
-            setcookie("auth", "destroy-cookie", time() - 3600, "/", $_SERVER['HTTP_HOST'], false, true);
+            setcookie("auth", "destroy-cookie", time() - 3600, "/", "localhost", false, true);
         }
 
         $this->redirect('login');

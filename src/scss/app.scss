@@ -70,7 +70,6 @@ body{
     display: flex;
     justify-content: space-between;
     background-color: $primary_black;
-    box-shadow: 0 2px 1px $secondary_black;
 }
 
 .logo {
@@ -225,6 +224,8 @@ TOUT CE QUI EST HOME
 .content {
     position: relative;
     width: 74%;
+    height: 100%;
+    overflow-y: scroll;
     padding: 20px;
     .revision_head {
         i {

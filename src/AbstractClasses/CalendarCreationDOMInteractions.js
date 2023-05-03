@@ -1,6 +1,8 @@
 import { post } from "../Functions/Request/ajax";
 import { elementHasClassName, removeElementFromDOM } from "../Functions/Tools/DOMTools";
 import { createArray, foreachArrayElements, isUndefined, loopOverObject } from "../Functions/Tools/Tools";
+import Repetition from "../RepetitionsGeneration/Repetition";
+import RepetitionDate from "../RepetitionsGeneration/RepetitionDate";
 import { modalResize } from "../responsives/modalResize";
 import DOMInteractions from "./DOMInteractions";
 import calendarGenerationTools from "./Tools/calendarGenerationTools";
@@ -18,11 +20,16 @@ export default class CalendarCreationDOMInteractions extends DOMInteractions {
         this.repetitionLinesHaveBeenCreated = false
         this.tableLinesLengthOfCalendarCreationLines = 1
         this.normalDailyNumberOfSubjects = 3
+        this.numberOfRepetitions = 5
+        this.createdLines = 0
+        this.currentRowToRepeat
         this.isQuotaError = false
         this.isWarning = false
         this.messageForQuotaErrorOne = "Erreur du quota 3 matières/j. Il faut au moins que l'une d'entre elles soient un exercice."
         this.messageForQuotaErrorTwo = "Erreur du quota 3 matières/j. Il faut au moins que deux d'entre elles soient un exercice."
         this.currentQuotaErrorMessageToShow
+        this.repetition = new Repetition()
+        this.date = new RepetitionDate()
     }
 
     handleActionsInModalForm()
@@ -35,7 +42,6 @@ export default class CalendarCreationDOMInteractions extends DOMInteractions {
 
     handleAddLineButtonClick()
     {
-        this.tableLinesLengthOfCalendarCreationLines++
         let addLineButton = this.modal.querySelector('.add-line')
         addLineButton.addEventListener('click', this.appendNewLineToCalendarCreationTable.bind(this))  
     }
@@ -49,6 +55,7 @@ export default class CalendarCreationDOMInteractions extends DOMInteractions {
     }
 
     createLine (){
+        this.tableLinesLengthOfCalendarCreationLines++
         this.currentCreatedLine = this.createElement('tr', 'subject-line')
         let removeLineButton = this.modal.querySelector('.remove-line')
         let addLineButton = this.modal.querySelector('.add-line')
@@ -215,9 +222,13 @@ export default class CalendarCreationDOMInteractions extends DOMInteractions {
         this.toolsForCalendarGeneration.fetchLinesToRepeat()
         this.generateLinesOfRepetitions()
         this.removeRowActionMenuIfExists(e)
-        this.toolsForCalendarGeneration.fetchLinesWithSemblablesTimes()
-        this.toolsForCalendarGeneration.spaceEveryRevisionsWithSameHour()
-        this.toolsForCalendarGeneration.spaceEveryRevisionsSpacedUnder2H()
+        this.toolsForCalendarGeneration.fetchRowsWithSameDate()
+        
+        try {
+            this.toolsForCalendarGeneration.spaceEveryRevisionsSpacedUnder2H()
+        }catch(error){
+            console.error(error)
+        }
     }
 
     generateLinesOfRepetitions()
@@ -231,9 +242,13 @@ export default class CalendarCreationDOMInteractions extends DOMInteractions {
 
     numberOfSubjectsIsNormal(inputs, date)
     {
-        if(inputs.length < this.atLeastOneRowIsExercise && this.toolsForCalendarGeneration.linesToRepeat[date] !== undefined){
-            this.toolsForCalendarGeneration.linesToRepeat[date].forEach(element => {
-                this.generateRepetitionsCalendar(element)    
+        if(inputs.length < this.atLeastOneRowIsExercise 
+            && this.toolsForCalendarGeneration
+                .linesToRepeat[date] !== undefined
+        ){
+            this.toolsForCalendarGeneration.linesToRepeat[date].forEach(row => {
+                this.currentRowToRepeat = row
+                this.generateRepetitionsCalendar(row)    
             })
         }
     }
@@ -266,8 +281,9 @@ export default class CalendarCreationDOMInteractions extends DOMInteractions {
     {
         if(this.toolsForCalendarGeneration.numberOfLinesOfExercisePerDate[date] >= 1){
             if(!this.isQuotaError){
-                foreachArrayElements(this.toolsForCalendarGeneration.linesToRepeat[date], (element)=>{
-                    this.generateRepetitionsCalendar(element)
+                foreachArrayElements(this.toolsForCalendarGeneration.linesToRepeat[date], (line)=>{
+                    this.currentRowToRepeat = line
+                    this.generateRepetitionsCalendar(line)
                 })
             }
         }else{
@@ -284,7 +300,7 @@ export default class CalendarCreationDOMInteractions extends DOMInteractions {
     
     /**
      * 
-     * @param {*} linesToRepeatOfADate 
+     * @param {HTMLTableRowElement[]} linesToRepeatOfADate 
      */
     focusChapterInputOn(linesToRepeatOfADate){
         foreachArrayElements(linesToRepeatOfADate, (line)=>{
@@ -292,20 +308,23 @@ export default class CalendarCreationDOMInteractions extends DOMInteractions {
         })
     }
 
-    generateRepetitionsCalendar(element){
-        let elementInputs = element.querySelectorAll('input')
+    /**
+     * 
+     * @param {HTMLTableRowElement} row 
+     */
+    generateRepetitionsCalendar(row){
+        let rowInputs = row.querySelectorAll('input')
         let emptyInputExists = false
 
-        elementInputs.forEach(i => {
-            if(i.value === ''){
+        rowInputs.forEach(input => {
+            if(input.value === ''){
                 emptyInputExists = true
             }
         })
         
         if(!emptyInputExists){
             this.repetitionLinesHaveBeenCreated = true
-            this.createLine()
-            this.generateLines(element)
+            this.generateLines(row)
         }else{
             if(document.querySelector('.warning') === null){
                 this.isWarning = true
@@ -315,43 +334,94 @@ export default class CalendarCreationDOMInteractions extends DOMInteractions {
         }
     }
 
-    generateLines(element){
+    /**
+     * 
+     * @param {HTMLTableRowElement} row 
+     */
+    generateLines(row) {
+        for(let i = 1; i <= this.numberOfRepetitions; i++){
+            this.createLine()
+            this.createdLines = i
+            this.generateInputsValue()
+        }
+    }
+
+    /**
+     * 
+     * @param {HTMLElement} element IL FAUT REGLER CECI CAR CET ELEMENT RESTE L'ELEMENT INITIAL
+     */
+    generateInputsValue(){
         let tbody = document.querySelector('tbody')
-        let subjectInput = tbody.lastElementChild.querySelector('#subject-input')
-        let chapterInput = tbody.lastElementChild.querySelector('#chapter-input')
-        let dateInput = tbody.lastElementChild.querySelector('#date-input')
-        let hourInput = tbody.lastElementChild.querySelector('#hour-input')
+        let tbodyLastChild = tbody.lastElementChild
+        let subjectInput = tbodyLastChild.querySelector('#subject-input')
+        let chapterInput = tbodyLastChild.querySelector('#chapter-input')
+        let dateInput = tbodyLastChild.querySelector('#date-input')
+        let hourInput = tbodyLastChild.querySelector('#hour-input')
     
-        subjectInput.value = element.querySelector('#subject-input').value
-        chapterInput.value = element.querySelector('#chapter-input').value
+        subjectInput.value = this.currentRowToRepeat?.querySelector('#subject-input').value
+        chapterInput.value = this.currentRowToRepeat?.querySelector('#chapter-input').value
         
-        let splittedHour = element.querySelector('#hour-input').value.split(':')
-        let splittedDate = element.querySelector('#date-input').value.split('-')
+        /**
+         * @type {[string, string]}
+         */
+        let splittedHour = this.currentRowToRepeat?.querySelector('#hour-input').value.split(':')
+        let splittedDate = this.currentRowToRepeat?.querySelector('#date-input').value.split('-')
         
         let year = splittedDate[0]
         let month = splittedDate[1]
         let day = splittedDate[2]
-        let newHourValue = parseInt(splittedHour[0]) + 8
+
         
-        if(newHourValue < 20){
-            dateInput.value = element.querySelector('#date-input').value
-            hourInput.value = newHourValue + ':' + splittedHour[1]
-        }else{
-            let intNewDayValue = parseInt(day) + 1
-            let newDayValue = intNewDayValue.toString().length === 1 ? '0' + intNewDayValue.toString() : parseInt(day) + 1
-            newHourValue = 8
+        const hoursForNextRepetitions = this.repetition.hoursForNextRepetitions[this.createdLines]
+        let hourBetweenCurrentAndNextRepetition = hoursForNextRepetitions[0]
+        
+        let hourForNexRepetition = parseInt(splittedHour[0], 10) + hourBetweenCurrentAndNextRepetition
+        
+        if(this.createdLines === 1){
+            if(hourForNexRepetition < 20){
+                dateInput.value = this.currentRowToRepeat?.querySelector('#date-input').value
+                hourInput.value = hourForNexRepetition.toString(10).length === 1 ? 
+                    "0" + hourForNexRepetition + ':' + splittedHour[1] :
+                    hourForNexRepetition + ':' + splittedHour[1]
+            }else {
+                let intNewDayValue = parseInt(day) + 1
+                let newDayValue = intNewDayValue.toString().length === 1 ? '0' + intNewDayValue.toString() : intNewDayValue
+                hourForNexRepetition = 8
+                dateInput.value = year + '-' + month + '-' + newDayValue
+
+                if(dateInput.value === ''){
+                    let intMonth = parseInt(month)
+                    if(intMonth < 12){
+                        dateInput.value = year + '-0' + (intMonth + 1) + '-' + '01'
+                    }else{
+                        dateInput.value = (parseInt(year) + 1) + '-' + '01' + '-' + '01'
+                    }
+                }
+        
+                hourInput.value = '0' + hourForNexRepetition + ':' + splittedHour[1]
+            }
+            
+        }else {
+            const intDay = parseInt(day)
+            let intNewDayValue = intDay + hoursForNextRepetitions[1]
+            let newDayValue = intNewDayValue.toString().length === 1 ? '0' + intNewDayValue.toString() : intNewDayValue
+            
             dateInput.value = year + '-' + month + '-' + newDayValue
             if(dateInput.value === ''){
                 let intMonth = parseInt(month)
+                const intDayInNextMonth = intNewDayValue - this.date.numberOfDaysPerMonth[intMonth]
+                const dayInNextMonth = intDayInNextMonth.toString().length === 1 ? "0" + intDayInNextMonth : intDayInNextMonth
+                
                 if(intMonth < 12){
-                    dateInput.value = year + '-0' + (intMonth + 1) + '-' + '01'
+                    dateInput.value = year + '-0' + (intMonth + 1) + '-' + dayInNextMonth
                 }else{
                     dateInput.value = (parseInt(year) + 1) + '-' + '01' + '-' + '01'
                 }
             }
-    
-            hourInput.value = '0' + newHourValue + ':' + splittedHour[1]
+            hourInput.value = splittedHour[0] + ':' + splittedHour[1]
         }   
+
+        this.currentRowToRepeat = tbodyLastChild
     }
 
     createWarning(message){
