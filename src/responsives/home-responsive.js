@@ -1,4 +1,3 @@
-import CalendarCreationDOMInteractions from "../AbstractClasses/CalendarCreationDOMInteractions"
 import { createElement, elementHasClassName, removeElementFromDOM } from "../Functions/Tools/DOMTools"
 import { createArray, createConstArray, foreachArrayElements, isUndefined } from "../Functions/Tools/Tools"
 
@@ -64,7 +63,7 @@ export default class HomeResponsive {
             this.clipSubjectsName()
             this.transformCalendarTable()
         }else{
-            this.declipSubjectsName()
+            this.unclipSubjectsName()
             this.renderCalendarTableToHisOriginalForm()
         }
     }
@@ -180,7 +179,7 @@ export default class HomeResponsive {
         this.select.addEventListener('click', this.showOnlyColumsCorrespondantsToSelectedOption.bind(this))
     }
 
-    declipSubjectsName()
+    unclipSubjectsName()
     {
         if(this.subjectsInnerHTML.length > 0 && this.subjects){
             for(const index in this.subjectsInnerHTML){
@@ -251,7 +250,7 @@ export default class HomeResponsive {
      */
     removeButtonsForHiddenSidebars(onlyUserProfile = false)
     {
-        if(!onlyUserProfile){
+        if(!onlyUserProfile && !isUndefined(this.sidebarLeftButton)){
             removeElementFromDOM(this.sidebarLeftButton)
             this.sidebarLeftButton = undefined
         }

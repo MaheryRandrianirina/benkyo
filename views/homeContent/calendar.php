@@ -7,6 +7,9 @@
                 <th>Heure <i class="fas fa-calendar-times"></i></th>
                 <th>Chapitre</th>
                 <th>Statut</th>
+                <th>
+                    <button class="delete_button"><i class="fas fa-trash"></i></button>
+                </th>
             </tr>
         </thead>
         <tbody class="calendar-tbody">
@@ -26,5 +29,4 @@
             <?php endforeach?>
         </tbody>
     </table>
-    <button class="delete_button">Supprimer l'emploi du temps <i class="fas fa-trash"></i></button>
 </div>

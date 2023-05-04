@@ -2,12 +2,15 @@ import { get } from '../Functions/Request/ajax'
 import Content from './Content'
 
 export default class SidebraLeft {
+
     constructor()
     {
         this.contentElement = document.querySelector('.content')
         this.sidebarLeftChildren = document.querySelectorAll('.sidebar-left i')
-        if(this.sidebarLeftChildren !== null){
-            this.sidebarLeftChildren.forEach(child => {
+        this.navMenuChildren = document.querySelectorAll('nav .menu i')
+        this.menu = this.sidebarLeftChildren.length > 0 ? this.sidebarLeftChildren : this.navMenuChildren
+        if(this.menu.length > 0){
+            this.menu.forEach(child => {
                 if(child.classList.contains('active-item')){
                     this.loadContent()
                 }
@@ -17,10 +20,10 @@ export default class SidebraLeft {
 
     sidebarLeftChildrenclick()
     {
-        this.sidebarLeftChildren.forEach(child => {
+        this.menu.forEach(child => {
             child.addEventListener('click', (e)=>{
                 this.contentElement.innerHTML = ""
-                this.sidebarLeftChildren.forEach(s => {
+                this.menu.forEach(s => {
                     s.classList.remove('active-item')
                 })
 

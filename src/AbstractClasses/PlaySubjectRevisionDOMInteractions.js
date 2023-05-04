@@ -18,7 +18,7 @@ export default class PlaySubjectRevisionDOMInteractions extends ThereAreDataToSe
          * La véritable valeur c'est 0 mais la valeur actuelle est juste pour les tests
          * @var defaultTimeValue
          */
-        this.defaultTimeValue = 1450
+        this.defaultTimeValue = 0
         this.homeContentSection
         this.intervalOfChronometer
         this.pauseButton
