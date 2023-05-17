@@ -17,21 +17,27 @@ $navClass = "nav-login"
             </div>
         </div>
         <div class="login_container_right">
-            <div class="have-no-account">Pas de compte ? <a href="<?= $router->generate('register')?>">S'inscrire</a></div>
             <?= FormController::showErrors('loginUserNotFound', "userNotFound") ?? '' ?>
             <form action="<?=$router->generate('login')?>" method="post" class="login_form">
-                <label for="pseudo">Entrez votre pseudo</label>
                 <div class="pseudo-container">
+                    <label for="pseudo">Entrez votre pseudo</label>
                     <input type="text" placeholder="pseudo" name="pseudo" id="pseudo" autocomplete="off"><i class="fas fa-user pseudo-logo"></i>
+                    <?= FormController::showErrors("login_errors", "pseudo") ?? '' ?>
                 </div>
-                <?= FormController::showErrors("login_errors", "pseudo") ?? '' ?>
-                <label for="pwd">Entrez votre mot de passe</label>
                 <div class="pwd-container">
+                    <label for="pwd">Entrez votre mot de passe</label>
                     <input type="password" placeholder="mot de passe" id="pwd" name="pwd"><i class="fas fa-lock lock"></i>
+                    <?= FormController::showErrors("uncorrect-password", "pwd") ?? '' ?><br>
                 </div>
-                <?= FormController::showErrors("uncorrect-password", "pwd") ?? '' ?><br>
-                <input type="checkbox" class="remember-me" name="remember-me"><span class="remember-span">Se souvenir de moi</span><br>
-                <button type="submit" class="submitBtn" disabled>Se connecter</button>
+                <div class="remember_me_container">
+                    <input type="checkbox" class="remember-me" name="remember-me">
+                    <span class="remember-span">Se souvenir de moi</span><br>
+                </div>
+                <div class="login_button">
+                    <button type="submit" class="submitBtn" disabled>Se connecter</button>
+                </div>
+                <div class="have-no-account">Pas de compte ? <a href="<?= $router->generate('register')?>">S'inscrire</a></div>
+
             </form>
         </div>
         <?php

@@ -23,17 +23,18 @@ class Controller {
      * rend la vue passé en paramètre
      * @return void
      */
-    public function render(string $view, $params = [], array $routeParams = [])
+    public function render(string $view, $params = [], array $routeParams = [], ?string $layout = null)
     {
         $router = $this->router;
         $routeParams = $routeParams;
         $params = $params;
         $authUser = User::getAuthenticated();
         $view = str_replace(".", "/", $view);
+        $pageLayout = $layout !== null ? $layout : "default";
         ob_start();
         require dirname(__DIR__,2) . DIRECTORY_SEPARATOR . "views" . DIRECTORY_SEPARATOR . $view . ".php";
         $content = ob_get_clean();
-        require dirname(__DIR__,2) . DIRECTORY_SEPARATOR . "views/layouts/default.php";
+        require dirname(__DIR__,2) . DIRECTORY_SEPARATOR . "views/layouts/" . DIRECTORY_SEPARATOR. $pageLayout . ".php";
     }
     
     /**

@@ -26,7 +26,7 @@ class RegisterController extends FormController {
             $homeController = new HomeController($this->router);
             $homeController->indexForLogged();
         }else{
-            $this->render("register", $params);
+            $this->render("register", $params, [], "registration");
         }
         
     }

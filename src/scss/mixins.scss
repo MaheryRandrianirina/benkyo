@@ -1,16 +1,15 @@
 @import "./vars.scss";
 
-@mixin opposite_of_form_subject {
+@mixin link_to_registration_or_login_page {
     font-size: 12px;
     text-decoration: underline;
-    position: absolute;
-    top: 50px;
-    left: 74px;
+
     a {
         font-weight: bold;
         color: $CTA;
         text-decoration: none;
     }
+
 }
 
 @mixin input_validation_indication() {
